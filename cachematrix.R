@@ -8,7 +8,9 @@
 ## Notice that changing the matrix values, automatically resets its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
+        ## when first crating the matrix the inverse is not yet calculated, so inv is null
         inv <- NULL
+        ## when seeting a value for the matrix this as to substitute the original 'x' value and reset the inverse value
         set <- function(A) {
                 x <<- A
                 inv <<- NULL
@@ -16,7 +18,7 @@ makeCacheMatrix <- function(x = matrix()) {
         get <- function() x
         setinv <- function(inverse) inv <<- inverse
         getinv <- function() inv
-        
+        ## the list is a representation of the supplied matrix along with its inverse
         list(set = set, get = get, setinv = setinv, getinv = getinv)
 }
 
@@ -26,12 +28,14 @@ makeCacheMatrix <- function(x = matrix()) {
 ## If not, then the function calculates the inverse, and associates this value with the matrix
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+        ## first the inverse value in the matrix representation is retrieved
         inv <- x$getinv()
+        ## if it as already been calculated, then it is just returned
         if (!is.null(inv)) {
                 message("Retriving cached data")
                 return(inv)
         }
+        ##Otherwise it is calculated, associated with the matrix representation and returned
         M <- x$get()
         inv <- solve(M, ...)
         x$setinv(inv)
