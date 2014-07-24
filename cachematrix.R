@@ -8,9 +8,9 @@
 ## Notice that changing the matrix values, automatically resets its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
-        ## when first crating the matrix the inverse is not yet calculated, so inv is null
+        ## when first creating the matrix the inverse is not yet calculated, so inv is null
         inv <- NULL
-        ## when seeting a value for the matrix this as to substitute the original 'x' value and reset the inverse value
+        ## when setting a value for the matrix this as to substitute the original 'x' value and reset the inverse value
         set <- function(A) {
                 x <<- A
                 inv <<- NULL
